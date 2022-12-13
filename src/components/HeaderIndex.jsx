@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {Button} from './button/Button';
-import './HeaderIndex.css';
 import {
     Icon,
-    Checkbox,
 } from 'semantic-ui-react'
 
 const HeaderIndex = () => {
