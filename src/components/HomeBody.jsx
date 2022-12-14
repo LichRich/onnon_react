@@ -6,14 +6,15 @@ const HomeBody = () => {
         dots: true,
         infinite: true,
         speed: 500,
+        draggable: false,
         slidesToShow: 1,
         slidesToScroll: 1
     };
 
     return (
-        <div className='section-category'>
+        <div className='sections section-category'>
             <div className='container container-category'>
-                <h2 id='category-title'>카테고리</h2>
+                <h2 id='category-title'>산업 분야</h2>
                 <Slider {...carousel_settings}>
                     <div className='carousel-item'>
                         <div className='row category-row'>
@@ -25,7 +26,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>금속가공</h3>
+                                        <p className='category-title'>금속가공</p>
                                     </div>
                                 </a>
                             </div>
@@ -37,7 +38,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>플라스틱가공</h3>
+                                        <p className='category-title'>플라스틱가공</p>
                                     </div>
                                 </a>
                             </div>
@@ -49,7 +50,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>목재가공</h3>
+                                        <p className='category-title'>목재가공</p>
                                     </div>
                                 </a>
                             </div>
@@ -61,7 +62,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>섬유봉제</h3>
+                                        <p className='category-title'>섬유봉제</p>
                                     </div>
                                 </a>
                             </div>
@@ -73,7 +74,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>CNC가공</h3>
+                                        <p className='category-title'>CNC가공</p>
                                     </div>
                                 </a>
                             </div>
@@ -85,7 +86,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>밀링</h3>
+                                        <p className='category-title'>밀링</p>
                                     </div>
                                 </a>
                             </div>
@@ -97,7 +98,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>유리가공</h3>
+                                        <p className='category-title'>유리가공</p>
                                     </div>
                                 </a>
                             </div>
@@ -109,7 +110,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>화학</h3>
+                                        <p className='category-title'>화학</p>
                                     </div>
                                 </a>
                             </div>
@@ -125,7 +126,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>3D프린팅</h3>
+                                        <p className='category-title'>3D프린팅</p>
                                     </div>
                                 </a>
                             </div>
@@ -137,7 +138,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>가죽</h3>
+                                        <p className='category-title'>가죽</p>
                                     </div>
                                 </a>
                             </div>
@@ -149,7 +150,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>펄프/종이</h3>
+                                        <p className='category-title'>펄프/종이</p>
                                     </div>
                                 </a>
                             </div>
@@ -161,7 +162,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>사출금형</h3>
+                                        <p className='category-title'>사출금형</p>
                                     </div>
                                 </a>
                             </div>
@@ -173,7 +174,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>회로/기판</h3>
+                                        <p className='category-title'>회로/기판</p>
                                     </div>
                                 </a>
                             </div>
@@ -185,7 +186,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>조립/부품</h3>
+                                        <p className='category-title'>조립/부품</p>
                                     </div>
                                 </a>
                             </div>
@@ -197,7 +198,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>화장품</h3>
+                                        <p className='category-title'>화장품</p>
                                     </div>
                                 </a>
                             </div>
@@ -209,7 +210,7 @@ const HomeBody = () => {
                                             alt="category-image"/>
                                     </div>
                                     <div className="category-caption card-caption">
-                                        <h3 className='category-title'>설계</h3>
+                                        <p className='category-title'>설계</p>
                                     </div>
                                 </a>
                             </div>

@@ -32,22 +32,19 @@ body {
  *                            category                         *
  *                                                             *
  ***************************************************************/
-.section-category {
-    flex: 1;
-}
-
 .container-category {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 #category-title {
     width: 100%;
-    margin: 0;
+    margin: 2.5rem 0;
     text-align: center;
     font-size: 2rem;
+    font-family: gmarket-sans;
 }
 
 .slick-slider {
@@ -67,7 +64,12 @@ body {
 
 .slick-arrow::before {
     font-size: 2rem;
-    color: #111;
+    color: #555;
+    transition: all 0.2s ease;
+}
+
+.slick-arrow:hover .slick-arrow::before {
+    color: #000;
 }
 
 .category-card {
@@ -181,3 +183,24 @@ a {
         width: 50%;
     }
 }
+
+/***************************************************************
+*                                                             *
+*                           font-css                          *
+*                                                             *
+***************************************************************/
+@font-face {
+    font-family: gmarket-sans;
+    src: url(./fonts/GmarketSansOTF/GmarketSansMedium.otf);
+  }
+  
+  @font-face {
+    font-family: gmarket-sans-bold;
+    src: url(./fonts/GmarketSansOTF/GmarketSansBold.otf);
+  }
+  
+  @font-face {
+    font-family: gmarket-sans-light;
+    src: url(./fonts/GmarketSansOTF/GmarketSansLight.otf);
+  }
+  

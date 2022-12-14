@@ -1,0 +1,81 @@
+/***************************************************************
+ *                                                             *
+ *                       common features                       *
+ *                                                             *
+ ***************************************************************/
+ html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/***************************************************************
+ *                                                             *
+ *                            list                             *
+ *                                                             *
+ ***************************************************************/
+#list-title {
+    text-align: center;
+    font-family: gmarket-sans;
+    font-size: 2rem;
+    margin: 2.5rem 0;
+}
+
+.list-row {
+    justify-content: space-around;
+}
+
+.card-company {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    width: 20%;
+    max-width: 262px;
+    height: 350px;
+    margin: 0 1.5% 30px 1.5%;
+    border: 1px solid #999;
+    border-radius: 10%;
+    transition: all 0.2s ease;
+}
+
+.card-company:hover {
+    border: 5px solid #999;
+    cursor: pointer;
+}
+
+.card-img-top {
+    height: 200px;
+    overflow: hidden;
+    align-items: center;
+    display: flex;
+    text-align: center;
+}
+
+.card-company-img {
+    width: 70%;
+    object-fit: cover;
+    margin: auto;
+}
+
+.card-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.7rem;
+}
+
+.card-body {
+    flex: 1;
+    padding: 1rem;
+}
+
+.card-text {
+    overflow: hidden;
+    font-size: 1.2rem;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
