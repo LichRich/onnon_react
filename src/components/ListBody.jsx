@@ -1,32 +1,29 @@
 import React from "react";
 import Slider from "react-slick";
+import { Link, useNavigate } from "react-router-dom";
 
-const ListBody = () => {
-    const carousel_settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        draggable: false,
-        slidesToShow: 1,
-        slidesToScroll: 1
-    };
+const ListBody = ({settings}) => {
+
+    let navigate = useNavigate();
 
     return (
         <section className="sections section-list">
             <div className="container container-list">
                 <h2 id="list-title">기업 목록</h2>
-                <Slider {...carousel_settings}>
+                <Slider {...settings}>
                     <div className="carousel-item">
                         <div className="row list-row">
-                            <div className="card card-company" id="onandon">
-                                <div className="card-img-top">
-                                    <img src={process.env.PUBLIC_URL + "/img/company/dongseo/logo.png"} className="card-company-img" alt="..."/>
+                            <Link to="/company">
+                                <div className="card card-company" id="onandon">
+                                    <div className="card-img-top">
+                                        <img src={process.env.PUBLIC_URL + "/img/company/dongseo/logo.png"} className="card-company-img" alt="..."/>
+                                    </div>
+                                    <div className="card-body">
+                                        <p className="card-title">(주) 동서정밀</p>
+                                        <p className="card-text">금형 제조, 산업용 접착제 부품 제조 및 판매, 플라스틱 용품 제조</p>
+                                    </div>
                                 </div>
-                                <div className="card-body">
-                                    <p className="card-title">(주) 동서정밀</p>
-                                    <p className="card-text">금형 제조, 산업용 접착제 부품 제조 및 판매, 플라스틱 용품 제조</p>
-                                </div>
-                            </div>
+                            </Link>
                             <div className="card card-company">
                                 <div className="card-img-top">
                                     <img src={process.env.PUBLIC_URL + "/img/logo/symbol_basic.png"} className="card-company-img" alt="..."/>

@@ -9,11 +9,8 @@
     --bg-dark: #111;
 }
 
- html, body {
-    height: 100%;
-}
-
 body {
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -48,28 +45,28 @@ body {
 }
 
 .slick-slider {
-   height: 70%;
-   display: flex;
-   align-items: center;
+   height: 70% !important;
+   display: flex !important;
+   align-items: center !important;
 }
 
 .slick-list {
-    width: 100%;
+    width: 100% !important;
 }
 
 .slick-arrow {
-    width: 2rem;
-    height: 2rem;
+    width: 2rem !important;
+    height: 2rem !important;
 }
 
 .slick-arrow::before {
-    font-size: 2rem;
-    color: #555;
-    transition: all 0.2s ease;
+    font-size: 2rem !important;
+    color: #555 !important;
+    transition: all 0.2s ease !important;
 }
 
 .slick-arrow:hover .slick-arrow::before {
-    color: #000;
+    color: #000 !important;
 }
 
 .category-card {

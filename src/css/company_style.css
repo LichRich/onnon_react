@@ -1,0 +1,258 @@
+/***************************************************************
+ *                                                             *
+ *                      Common features                        *
+ *                                                             *
+ ***************************************************************/
+ :root {
+    --navbar-height: 70px;
+}
+
+/***************************************************************
+ *                                                             *
+ *                            About                            *
+ *                                                             *
+ ***************************************************************/
+#about {
+    width: 100%;
+    height: 95vh;
+    position: relative;
+}
+
+.backgrounds {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -9;
+}
+
+.backgrounds img {
+    width: 100%;
+    height: 100%;
+}
+
+.backgrounds::after {
+    position: absolute;
+    content: "";
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 8;
+}
+
+#intro-contents {
+    width: 100%;
+    height: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#intro-img {
+    width: 25%;
+}
+
+.intro-contents-text {
+    padding-left: 40px;
+    color: #fff;
+}
+
+.intro-contents-title {
+    font-size: 2.7rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.intro-contents-desc {
+    font-size: 1.3rem;
+}
+
+/***************************************************************
+ *                                                             *
+ *                          products                           *
+ *                                                             *
+ ***************************************************************/
+#products {
+    padding-top: 70px;
+    height: 100vh;
+    align-items: center;
+    transition: all 0.2s ease-in-out 0s;
+    margin-bottom: 70px;
+}
+
+.products-title {
+    font-weight: bold;
+    text-align: center;
+}
+
+.cards-grid {
+    padding-bottom: 5rem;
+    display: grid;
+    max-width: 100rem;
+    margin: 0 auto;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-auto-rows: 0.5rem;
+}
+
+.card-item img {
+    display: block;
+    border-radius: 0.5rem;
+    width: 100%;
+}
+
+.products-card {
+    position: relative;
+    border-radius: 1rem;
+    transition: all 0.2s ease;
+}
+
+.products-card:hover {
+    border: #999 5px solid;
+    cursor: pointer;
+}
+
+/***************************************************************
+ *                                                             *
+ *                           history                           *
+ *                                                             *
+ ***************************************************************/
+* {
+    list-style: none;
+}
+
+#history {
+    padding-top: 10px;
+    height: 100vh;
+}
+
+.history-title {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 70px;
+    font-size: 33px;
+    color: #000;
+    line-height: 1;
+}
+
+#history-nav {
+    margin-top: 30px;
+    display: flex;
+    height: 70px;
+}
+
+#tablist {
+    height: 100%;
+    margin: auto;
+}
+
+.nav-tab-item {
+    margin: 0 10px 0 10px;
+}
+
+.nav-tab-custom {
+    font-size: 1.3rem;
+    border-radius: 0.7rem;
+    background-color: #000;
+    color: #fff;
+    border: 5px solid #000;
+    transition: all 0.2s ease;
+}
+
+.nav-tab-custom:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.tab-content {
+    width: 90%;
+    margin: auto;
+}
+
+.tab-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.year-content-box {
+    display: flex;
+    font-size: 1.3rem;
+    height: 7%;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+}
+
+.year {
+    padding-right: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+/***************************************************************
+ *                                                             *
+ *                           Licenses                          *
+ *                                                             *
+ ***************************************************************/
+#license {
+    padding-top: 60px;
+    height: 100vh;
+}
+
+.license-title {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#license .container {
+    margin-top: 10px;
+}
+
+/***************************************************************
+ *                                                             *
+ *                          contact us                         *
+ *                                                             *
+ ***************************************************************/
+#contact-map {
+    position: relative;
+    overflow: hidden;
+    width: 30vw;
+    height: 48vh;
+}
+
+#contact-map img {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 48vh;
+    object-fit: cover;
+}
+
+@media(max-width: 800px) {
+    #contact {
+        padding: 0;
+    }
+
+    #contact-caption {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #contact-title {
+        font-size: medium;
+        text-align: center;
+    }
+
+    .contact-desc {
+        font-size: small;
+    }
+
+    #contact-map, #contact-map img {
+        height: 20vh;
+    }
+}
