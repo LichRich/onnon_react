@@ -8,7 +8,7 @@
 }
 
 * {
-  font-family: gmarket-sans;
+    font-family: gmarket-sans;
 }
 
 body {
@@ -175,7 +175,7 @@ a:hover {
     background-color: #fff;
     transform: translateX(100%);
     z-index: 99;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .side-collapse {
@@ -368,18 +368,18 @@ a {
 }
 
 .footer-row {
-  align-items: center;
-  justify-content: space-around;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .footer-info {
-  display: flex;
-  font-size: 1rem;
-  line-height: 1rem;
+    display: flex;
+    font-size: 1rem;
+    line-height: 1rem;
 }
 
 .information {
-  margin: 0 1rem;
+    margin: 0 1rem;
 }
 
 .footer-text {
@@ -424,26 +424,35 @@ a {
 ***************************************************************/
 .scroll-up {
     position: fixed;
-    display: none;
     bottom: 20px;
     right: 20px;
     z-index: 999;
 }
 
-.scroll-up a {
-    display: block;
+#to-top {
+    cursor: pointer;
+    display: flex;
     height: 35px;
     width: 35px;
     text-align: center;
-    line-height: 28px;
-    font-size: 28px;
-    color: #aaa;
+    align-items: center;
+    font-size: 2rem;
+    background-color: #555;
+    color: #fff;
     opacity: 0.6;
     border-radius: 100%;
+    border: 0;
+    transition: all 0.2s ease;
 }
 
-.scroll-up a:active,
-.scroll-up a:hover {
+#to-top .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+#to-top:hover {
     opacity: 1;
     color: #111;
     background-color: #fff;
@@ -455,16 +464,16 @@ a {
 *                                                             *
 ***************************************************************/
 @font-face {
-  font-family: gmarket-sans;
-  src: url(./css/fonts/GmarketSansOTF/GmarketSansMedium.otf);
+    font-family: gmarket-sans;
+    src: url("./css/fonts/GmarketSansOTF/GmarketSansMedium.otf");
 }
 
 @font-face {
-  font-family: gmarket-sans-bold;
-  src: url(./css/fonts/GmarketSansOTF/GmarketSansBold.otf);
+    font-family: gmarket-sans-bold;
+    src: url("./css/fonts/GmarketSansOTF/GmarketSansBold.otf");
 }
 
 @font-face {
-  font-family: gmarket-sans-light;
-  src: url(./css/fonts/GmarketSansOTF/GmarketSansLight.otf);
+    font-family: gmarket-sans-light;
+    src: url("./css/fonts/GmarketSansOTF/GmarketSansLight.otf");
 }
