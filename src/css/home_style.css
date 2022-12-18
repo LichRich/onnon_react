@@ -44,7 +44,7 @@ body {
     font-family: gmarket-sans;
 }
 
-.slick-slider {
+.container-category .slick-slider {
    height: 70% !important;
    display: flex !important;
    align-items: center !important;
