@@ -1,25 +1,27 @@
-import { React, useState, useRef } from "react";
+import {React, useState, useRef} from "react";
 import {Icon} from "semantic-ui-react";
 import {useNavigate} from "react-router-dom";
 import ReactImageMagnify from '@vorld/react-image-magnify';
 
-const DetailBody = ({settings}) => {
+const DetailBody = () => {
 
     const navigate = useNavigate();
-    
-    const images = [
-        '../img/company/dongseo/products/detail/IMG_1089.jpg',
-        '../img/company/dongseo/products/detail/IMG_1096.jpg',
-        '../img/company/dongseo/products/detail/IMG_1099.jpg',
-    ];
+
+    const images = ['../img/company/dongseo/products/detail/IMG_1089.jpg', '../img/company/dongseo/products/detail/IMG_1096.jpg', '../img/company/dongseo/products/detail/IMG_1099.jpg'];
 
     const [img, setImg] = useState(images[0]);
     const hoverHandler = (image, i) => {
         setImg(image);
-        refs.current[i].classList.add('active');
+        refs
+            .current[i]
+            .classList
+            .add('active');
         for (var j = 0; j < images.length; j++) {
             if (i !== j) {
-                refs.current[j].classList.remove('active');
+                refs
+                    .current[j]
+                    .classList
+                    .remove('active');
             }
         }
     };
@@ -27,7 +29,9 @@ const DetailBody = ({settings}) => {
     refs.current = [];
     const addRefs = (el) => {
         if (el && !refs.current.includes(el)) {
-            refs.current.push(el);
+            refs
+                .current
+                .push(el);
         }
     };
 
@@ -70,7 +74,7 @@ const DetailBody = ({settings}) => {
                             },
                             largeImage: {
                                 src: img,
-                                width: 3000,
+                                width: 2700,
                                 height: 1500,
                             },
                             enlargedImageContainerDimensions: {
@@ -85,24 +89,13 @@ const DetailBody = ({settings}) => {
                 </div>
 
                 <div className="images-list">
-                    <div className="img-list-box">
-                        <img
-                            src={process.env.PUBLIC_URL + "/img/company/dongseo/products/detail/IMG_1089.jpg"}
-                            alt=""
-                            className="img-list-item"/>
-                    </div>
-                    <div className="img-list-box">
-                        <img
-                            src={process.env.PUBLIC_URL + "/img/company/dongseo/products/detail/IMG_1096.jpg"}
-                            alt=""
-                            className="img-list-item"/>
-                    </div>
-                    <div className="img-list-box">
-                        <img
-                            src={process.env.PUBLIC_URL + "/img/company/dongseo/products/detail/IMG_1099.jpg"}
-                            alt=""
-                            className="img-list-item"/>
-                    </div>
+                    {
+                        images.map((src, index) => (
+                            <div key={index} className="img-list-box">
+                                <img src={src} alt="" className="img-list-item"/>
+                            </div>
+                        ))
+                    }
                 </div>
             </div>
         </div>

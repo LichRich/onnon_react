@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Slider from "react-slick";
 import {Link, useNavigate} from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
 
-const ListBody = ({settings}) => {
+const ListBody = ({settings, db}) => {
 
     const navigate = useNavigate();
     const toCompany = () => {
         navigate("/company");
     }
+
+    const companiesRef = collection(db, "companies");
+
+    useEffect(() => {
+        const getCompanies = async () => {
+            const companies = await getDocs(companiesRef);
+            companies.forEach((doc) => {
+                console.log(doc.data());
+            })
+        }
+        getCompanies();
+    })
 
     return (
         <section className="sections section-list">

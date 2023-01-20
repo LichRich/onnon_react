@@ -3,10 +3,10 @@ import HomeBody from '../components/HomeBody';
 
 import "../css/home_style.css";
 
-function Home({settings}) {
+function Home({settings, db}) {
 
     return (
-        <HomeBody settings={settings} />
+        <HomeBody settings={settings} db={db} />
     );
 }
 

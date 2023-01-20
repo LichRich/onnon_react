@@ -1,5 +1,6 @@
-import {React, useState} from 'react';
+import {React, useState, useEffect} from 'react';
 import {Routes, Route} from 'react-router-dom';
+import { firestore } from './firebaseConfig';
 
 import Home from './pages/Home';
 import List from './pages/List';
@@ -33,6 +34,10 @@ function App() {
         slidesToScroll: 1
     };
 
+    // useEffect(() => {
+    //   console.log(firestore);
+    // });
+
     return (
       <>
         < Loading />
@@ -41,15 +46,16 @@ function App() {
         <Backdrop open={open} click={handleClick}/>
 
         <Routes>
-            <Route exact="exact" path='/' element={<Home settings={carousel_settings} />}/>
-            <Route path='/list' element={<List settings={carousel_settings} />}/>
-            <Route path='/company' element={<Company settings={carousel_settings} />}/>
-            <Route path='/detail' element={<Detail settings={carousel_settings}/>} />
+            <Route exact="exact" path='/' element={<Home settings={carousel_settings} db={firestore} />}/>
+            <Route path='/list' element={<List settings={carousel_settings} db={firestore}/>}/>
+            <Route path='/company' element={<Company settings={carousel_settings} db={firestore} />}/>
+            <Route path='/detail' element={<Detail db={firestore} />} />
         </Routes>
 
         <ToTop />
 
         <Footer/>
+        {/* <div>{firestore._databaseId.projectId}</div> */}
       </>
     );
 }

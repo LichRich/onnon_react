@@ -1,13 +1,145 @@
-import React from 'react'
+import {
+    collection,
+    endBefore,
+    getDoc,
+    getDocs,
+    limit,
+    limitToLast,
+    orderBy,
+    query,
+    startAfter,
+    documentId,
+    endAt,
+    getCountFromServer
+} from 'firebase/firestore';
+import React, {useEffect, useState} from 'react'
+import {Button} from 'semantic-ui-react'
 import Slider from 'react-slick';
 
-const HomeBody = ({settings}) => {
+const HomeBody = ({settings, db}) => {
+
+    const [list, setList] = useState([]);
+    const [page, setPage] = useState(1);
+    const [len, setLen] = useState(0);
+
+    const categoryRef = collection(db, "categories");
+
+    useEffect(() => {
+        const getCLength = async () => {
+            const lengthSnapshot = await getCountFromServer(categoryRef);
+            setLen(lengthSnapshot.data().count);
+        }
+        getCLength();
+    }, [len]);
+    
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const categories = query(categoryRef, orderBy("id"), limit(8));
+            const documentSnapshots = await getDocs(categories);
+            setList(documentSnapshots.docs.map((doc) => ({
+                key: doc.id,
+                ...doc.data(),
+            })));
+            // const docs = await getDocs(categoryRef); setCategories(docs.docs.map((doc) =>
+            // ({     ...doc.data(),     id: doc.id })));
+        }
+        fetchData();
+    }, [])
+
+    const showNext = ({item}) => {
+        if(page < len/8) {
+            const fetchNext = async () => {
+                const nextSnapshots = query(categoryRef, orderBy("id"), startAfter(item.id), limit(8));
+                const nextDocs = await getDocs(nextSnapshots);
+                setList(nextDocs.docs.map((doc) => ({
+                    key: doc.id,
+                    ...doc.data()
+                })));
+                setPage(page + 1);
+            }
+            fetchNext();
+        }
+    }
+
+    const showPrev = ({item}) => {
+        const fetchPrev = async () => {
+            if(page > 1) {
+                const prevSnapshots = query(
+                    categoryRef,
+                    orderBy("id"),
+                    endBefore(item.id),
+                    limitToLast(8)
+                );
+                const prevDocs = await getDocs(prevSnapshots);
+                setList(prevDocs.docs.map((doc) => ({
+                    key: doc.id,
+                    ...doc.data()
+                })));
+                setPage(page - 1);
+            }
+        }
+        fetchPrev();
+    }
+
+    let catIndex = 0;
+
+    const showCategories = () => {
+        return list.map((value) => (
+            <div
+                key={'id' + (
+                    catIndex++
+                )}
+                className="category-card col-3 col-md-6">
+                <a role='link' aria-disabled='true'>
+                    <div className="category-image card-image">
+                        <img src={value.img} alt="category-img"/>
+                    </div>
+                    <div className='category-caption card-caption'>
+                        <p className='category-title'>{value.name}</p>
+                    </div>
+                </a>
+            </div>
+        ));
+    }
+    // const showCategories = () => {     <div className="carousel-item"> <div
+    // className='row category-row'>             {categories.map((value) => ( <div
+    // key={"id"+(catIndex++)} className='category-card col-3 col-md-6'> <a
+    // role="link" aria-disabled="true">                         <div
+    // className='category-image card-image'>                             <img
+    // src={value.img}                                 alt="category-img"/> </div>
+    // <div className="category-caption card-caption">
+    // <p className='category-title'>{value.name}</p>                         </div>
+    // </a>                 </div>             ))}         </div>     </div> }
 
     return (
         <div className='sections section-category'>
             <div className='container container-category'>
                 <h2 id='category-title'>산업 분야</h2>
-                <Slider {...settings}>
+                <div className='carousel-item'>
+                    <div className='row category-row'>
+                        {showCategories()}
+                    </div>
+                </div>
+                <button onClick={() => showPrev({item: list[0]})}>prev</button>
+                <button onClick={() => showNext({
+                    item: list[list.length - 1]
+                })}>next</button>
+                {/* {
+                    page === 1
+                        ? ''
+                        : <Button onClick={() => showPrev({item: list[0]})}>prev</Button>
+                }
+                {
+                    list.length < 8
+                        ? ''
+                        : <Button
+                                onClick={() => showNext({
+                                    item: list[list.length - 1]
+                                })}>next</Button>
+                } */}
+                {/* {showCategories} */}
+                {/* <Slider {...settings}>
                     <div className='carousel-item'>
                         <div className='row category-row'>
                             <div className='category-card col-3 col-md-6'>
@@ -208,7 +340,8 @@ const HomeBody = ({settings}) => {
                             </div>
                         </div>
                     </div>
-                </Slider>
+                </Slider> */
+                }
             </div>
         </div>
     )

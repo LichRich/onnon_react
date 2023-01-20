@@ -3,9 +3,9 @@ import DetailBody from "../components/DetailBody";
 
 import "../css/detail_style.css";
 
-const Detail = ({settings}) => {
+const Detail = () => {
     return(
-        <DetailBody settings={settings} />
+        <DetailBody />
     )
 }
 
