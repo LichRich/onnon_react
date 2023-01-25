@@ -1,6 +1,6 @@
 import React from "react";
 
-const Contact = () => {
+const Contact = ({data}) => {
     return (
         <section className="bg-dark" id="contact">
             <div className="container">
@@ -9,19 +9,19 @@ const Contact = () => {
                         <p className="contact-title" id="contact-title">Contact Us</p>
                         <p className="contact-desc">
                             <strong>주소:
-                            </strong>충남 아산시 염치읍 현대로 244-12
+                            </strong>{data.address}
                         </p>
                         <p className="contact-desc">
                             <strong>TEL:
-                            </strong>041)532-1658
+                            </strong>{data.tel}
                         </p>
                         <p className="contact-desc">
                             <strong>FAX:
-                            </strong>041)532-1659
+                            </strong>{data.fax}
                         </p>
                         <p className="contact-desc">
                             <strong>E-MAIL:
-                            </strong>ceda63@hanmail.net
+                            </strong>{data.email}
                         </p>
                     </div>
                     <div className="col-md-3 col-sm-6" id="contact-map">

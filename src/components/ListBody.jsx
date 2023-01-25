@@ -1,33 +1,118 @@
-import React, { useEffect } from "react";
+import {collection, getDocs, orderBy, query, getCountFromServer} from 'firebase/firestore';
+import React, {useEffect, useState} from "react";
 import Slider from "react-slick";
-import {Link, useNavigate} from "react-router-dom";
-import { collection, getDocs } from "firebase/firestore";
+import {useNavigate} from "react-router-dom";
 
 const ListBody = ({settings, db}) => {
 
+    const [companyList, setCompanyList] = useState([]);
+    const [companyPage, setCompanyPage] = useState(0);
+    const [companyLen, setCompanyLen] = useState(0);
+
+    let currCompanyPage = 0;
+    const companyNum = 4;
+
     const navigate = useNavigate();
-    const toCompany = () => {
-        navigate("/company");
+    const handleNavigate = (e) => {
+        navigate("/company", {
+            state: {
+                id: e.currentTarget.id,
+            }
+        });
     }
 
     const companiesRef = collection(db, "companies");
 
     useEffect(() => {
+        const getCompaniesLength = async () => {
+            const lengthSnapshot = await getCountFromServer(companiesRef);
+            await setCompanyLen(lengthSnapshot.data().count);
+            setCompanyPages();
+        }
+        getCompaniesLength();
+    }, [companyLen]);
+
+    useEffect(() => {
         const getCompanies = async () => {
-            const companies = await getDocs(companiesRef);
-            companies.forEach((doc) => {
-                console.log(doc.data());
-            })
+            const companies = await query(companiesRef, orderBy("sName"));
+            const documentSnapshots = await getDocs(companies);
+            await setCompanyList(documentSnapshots.docs.map((doc) => ({
+                key: doc.id,
+                ...doc.data()
+            })));
         }
         getCompanies();
-    })
+    }, [])
+
+    const setCompanyPages = () => {
+        if (companyLen === 0) {
+            setCompanyPage(0);
+        } else if (companyLen % 4 === 0) {
+            setCompanyPage(parseInt(companyLen / 4));
+        } else {
+            setCompanyPage(parseInt(companyLen / 4) + 1);
+        }
+    }
+
+    const showCompanyPages = () => {
+        let id = 0;
+        return ([...Array(companyPage)].map(() => {
+            return (
+                <div
+                    key={'id' + (
+                        id++
+                    )}
+                    className='carousel-item'>
+                    <div className='row list-row'>
+                        {showCompanies()}
+                    </div>
+                </div>
+            )
+        }));
+    }
+
+    let comIndex = 0;
+    const companySlicer = (list, start, end) => {
+        return list
+            .slice(start, end)
+            .map((v) => (
+                <div
+                    key={'id' + (
+                        comIndex++
+                    )}
+                    className="card card-company"
+                    id={v.id}
+                    onClick={handleNavigate}>
+                    <div className="card-img-top">
+                        <img src={v.logo} className="card-company-img" alt="company logo"/>
+                    </div>
+                    <div className="card-body">
+                        <p className="card-title">{v.sName}</p>
+                        <p className="card-text">{v.desc}</p>
+                    </div>
+                </div>
+            ));
+    }
+
+    const showCompanies = () => {
+        let companyCnt = 4;
+        let startPoint = currCompanyPage * companyNum;
+        if (companyLen - startPoint < 4) {
+            companyCnt = companyLen - startPoint;
+        }
+        let nextPoint = startPoint + companyCnt;
+        currCompanyPage += 1;
+
+        return companySlicer(companyList, startPoint, nextPoint);
+    }
 
     return (
         <section className="sections section-list">
             <div className="container container-list">
                 <h2 id="list-title">기업 목록</h2>
                 <Slider {...settings}>
-                    <div className="carousel-item">
+                    {showCompanyPages()}
+                    {/* <div className="carousel-item">
                         <div className="row list-row">
                             <div className="card card-company" id="onandon" onClick={toCompany}>
                                 <div className="card-img-top">
@@ -74,7 +159,8 @@ const ListBody = ({settings, db}) => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */
+                    }
                     <div className="carousel-item">
                         hihi
                     </div>
