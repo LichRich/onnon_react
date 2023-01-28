@@ -1,8 +1,26 @@
+import { doc, getDoc, getDocs } from "firebase/firestore";
 import {React, useState, useEffect} from "react";
 
 const History = ({data}) => {
 
-    const [id, setId] = useState("1990");
+    const [navItems, setNavItems] = useState([]);
+    const [pane, setPanes] = useState([]);
+    const [id, setId] = useState("1990`");
+
+    const historyRef = data;
+
+    useEffect(() => {
+        const getNavItems = async () => {
+            const documentSnapshots = await getDocs(historyRef);
+            // console.log(documentSnapshots.docs.map((doc) => ({key: doc.id, value: doc.data()})));
+            await setNavItems(documentSnapshots.docs.map((doc) => ({
+                key: doc.id,
+                ...doc.data()
+            })));
+            console.log(navItems);
+        }
+        getNavItems();
+    }, [])
 
     const panes = [
         {
@@ -30,12 +48,10 @@ const History = ({data}) => {
                         </div>
                     </div>
                 </div>
-        },
-        {
+        }, {
             id: "2000",
             title: "2000`",
-            contents: 
-                <div className="tab-container">
+            contents: <div className="tab-container">
                     <div className="year-content-box">
                         <div className="year">2003</div>
                         <div className="year-content">
@@ -52,27 +68,31 @@ const History = ({data}) => {
                         </div>
                     </div>
                 </div>
-        },
-        {
+        }, {
             id: "2010",
             title: "2010`",
-            contents: 
-                <div className="tab-container">
+            contents: <div className="tab-container">
                     <div className="year-content-box">
-                        <div className="year"><p>2010</p></div>
+                        <div className="year">
+                            <p>2010</p>
+                        </div>
                         <div className="year-content">
                             <p>Registered patent for blow molding device(Patent No.10-0964089)</p>
                         </div>
                     </div>
                     <div className="year-content-box">
-                        <div className="year"><p>2012</p></div>
+                        <div className="year">
+                            <p>2012</p>
+                        </div>
                         <div className="year-content">
                             <p>Develop, produce and initiate sales of axillary device for wrinkle free
                                 hanger(company product).</p>
                         </div>
                     </div>
                     <div className="year-content-box">
-                        <div className="year"><p>2014</p></div>
+                        <div className="year">
+                            <p>2014</p>
+                        </div>
                         <div className="year-content">
                             <p>Establishment of corporate body(Dong-Seo Engineering) Produce, sales of
                                 instant glue container and components for beauty, nails, and industrial
@@ -82,7 +102,9 @@ const History = ({data}) => {
                         </div>
                     </div>
                     <div className="year-content-box">
-                        <div className="year"><p>2016</p></div>
+                        <div className="year">
+                            <p>2016</p>
+                        </div>
                         <div className="year-content">
                             <p>Register patent for capsule type cap(Patent No.10-1592148).</p>
                         </div>
@@ -91,34 +113,36 @@ const History = ({data}) => {
         }
     ]
 
+    const showNav = () => {
+        return (panes.map((doc) => (
+            <li
+                key={doc.id}
+                className={id === doc.id
+                    ? "nav-tab-item is-active"
+                    : "nav-tab-item"}
+                onClick={() => setId(doc.id)}>
+                <div className="nav-tab-custom">
+                    {doc.title}
+                </div>
+            </li>
+        )))
+    }
+
+    const showPane = () => {
+        return (panes.filter((doc) => id === doc.id).map((doc) => (doc.contents)))
+    }
+
     return (
         <section className="history-section" id="history">
             <p className="history-title">주요 연혁</p>
             <div className="history-nav" id="history-nav">
                 <ul className="nav" id="tablist">
-                    {
-                        panes.map(item => (
-                            <li
-                                key={item.id}
-                                className={id === item.id
-                                    ? "nav-tab-item is-active"
-                                    : "nav-tab-item"}
-                                onClick={() => setId(item.id)}>
-                                    <div className="nav-tab-custom">
-                                        {item.title}
-                                    </div>
-                            </li>
-                        ))
-                    }
+                    {showNav()}
                 </ul>
             </div>
             <div className="container">
                 <div className="tab-content" id="tab-content">
-                    {
-                        panes
-                            .filter(item => id === item.id)
-                            .map(item => (item.contents))
-                    }
+                    {showPane()}
                 </div>
             </div>
         </section>
