@@ -1,9 +1,23 @@
-import {collection, getDocs, orderBy, query, getCountFromServer} from 'firebase/firestore';
+import {collection, getDocs, orderBy, query, getCountFromServer, where} from 'firebase/firestore';
 import React, {useEffect, useState} from "react";
 import Slider from "react-slick";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const ListBody = ({settings, db}) => {
+    
+    const [location, setLocation] = useState(useLocation());
+    let keywords = [""];
+
+    const companiesRef = collection(db, "companies");
+    let query_ = query(companiesRef, where("keywords", "array-contains-any", keywords));
+
+    useEffect(() => {
+        keywords = location.state.keyword;
+        query_ = query(companiesRef, where("keywords", "array-contains-any", keywords));
+        console.log(keywords);
+    }, [location])
+    const isEmpty = false;
+
 
     const [companyList, setCompanyList] = useState([]);
     const [companyPage, setCompanyPage] = useState(0);
@@ -21,11 +35,14 @@ const ListBody = ({settings, db}) => {
         });
     }
 
-    const companiesRef = collection(db, "companies");
+    if(keywords.length == 0) {
+        isEmpty = true;
+    }
 
     useEffect(() => {
         const getCompaniesLength = async () => {
-            const lengthSnapshot = await getCountFromServer(companiesRef);
+            const lengthSnapshot = await getCountFromServer(query_);
+            // const dummyLength = await getCountFromServer(query_);
             await setCompanyLen(lengthSnapshot.data().count);
             setCompanyPages();
         }
@@ -34,12 +51,13 @@ const ListBody = ({settings, db}) => {
 
     useEffect(() => {
         const getCompanies = async () => {
-            const companies = await query(companiesRef, orderBy("sName"));
+            const companies = await query(query_, orderBy("sName"));
             const documentSnapshots = await getDocs(companies);
             await setCompanyList(documentSnapshots.docs.map((doc) => ({
                 key: doc.id,
                 ...doc.data()
             })));
+            // console.log(keywords);
         }
         getCompanies();
     }, [])
@@ -56,19 +74,31 @@ const ListBody = ({settings, db}) => {
 
     const showCompanyPages = () => {
         let id = 0;
-        return ([...Array(companyPage)].map(() => {
+        if(companyPage > 0) {
+            return ([...Array(companyPage)].map(() => {
+                return (
+                    <div
+                        key={'id' + (
+                            id++
+                        )}
+                        className='carousel-item'>
+                        <div className='row list-row'>
+                            {showCompanies()}
+                        </div>
+                    </div>
+                )
+            }));
+        } else {
             return (
-                <div
-                    key={'id' + (
-                        id++
-                    )}
-                    className='carousel-item'>
+                <div className='carousel-item'>
                     <div className='row list-row'>
-                        {showCompanies()}
+                        <div className='no-items'>
+                            <p className='no-items-desc'>조건을 만족하는 기업이 없습니다.</p>
+                        </div>
                     </div>
                 </div>
             )
-        }));
+        }
     }
 
     let comIndex = 0;
@@ -161,9 +191,9 @@ const ListBody = ({settings, db}) => {
                         </div>
                     </div> */
                     }
-                    <div className="carousel-item">
+                    {/* <div className="carousel-item">
                         hihi
-                    </div>
+                    </div> */}
                 </Slider>
             </div>
         </section>

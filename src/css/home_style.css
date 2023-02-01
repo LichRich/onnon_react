@@ -50,6 +50,10 @@ body {
     align-items: center !important;
 }
 
+.container-category .slick-slider .slick-dots {
+    bottom: -45px !important;
+}
+
 .slick-list {
     width: 100% !important;
 }
@@ -106,7 +110,11 @@ body {
     z-index: 5;
 }
 
-.category-card a {
+.category-card:hover {
+    cursor: pointer;
+}
+
+.category-contents {
     text-decoration: none;
     position: relative;
     display: block;

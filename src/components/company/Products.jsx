@@ -154,7 +154,7 @@ const Products = ({settings, data}) => {
                             </div>
                         </MasonryGrid>
                     </div> */}
-                    <div className="carousel-item">
+                    {/* <div className="carousel-item">
                         <MasonryGrid
                             className="container masonry-container"
                             gap={30}
@@ -198,7 +198,7 @@ const Products = ({settings, data}) => {
                                     className="product-imgs"/>
                             </div>
                         </MasonryGrid>
-                    </div>
+                    </div> */}
 
                 </Slider>
             </div>

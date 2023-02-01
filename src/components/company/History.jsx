@@ -4,54 +4,103 @@ import {React, useState, useEffect} from "react";
 const History = ({data}) => {
 
     const [navItems, setNavItems] = useState([]);
-    const [pane, setPane] = useState([]);
-    const [contents, setContents] = useState([]);
-    const [id, setId] = useState("");
+    // const [pane, setPane] = useState([]);
+    let pane = [];
+    let contents = [];
+    // const [contents, setContents] = useState([]);
+    const [datas, setDatas] = useState([]);
+    const [id, setId] = useState(0);
 
     const historyRef = data;
 
     useEffect(() => {
         const getNavItems = async () => {
             const documentSnapshots = await getDocs(historyRef);
-            await setNavItems(documentSnapshots.docs.map((doc) => ({
-                key: doc.id,
-                ...doc.data()
-            })));
+            await setNavItems(documentSnapshots.docs.map((doc) => {return doc.id}));
+            await setDatas(documentSnapshots.docs.map((doc) => ({
+                ...doc.data(),
+            })))
+            // let contentsId = 0;
+            // setPane(datas.map((doc) => {
+            //     <div key={"id:"+(contentsId++)} className="tab-container">
+            //         {getDatas(doc)}
+            //     </div>
+            // }))
         }
         getNavItems();
-        // console.log(navItems);
+        // console.log(pane);
         // setId(navItems[0].key);
     }, [])
 
-    useEffect(() => {
-        const getPanes = async () => {
-            let paneKey = 0;
-            setPane(navItems.map((item) => ({
-                id: item.key, 
-                title: item.key,
-                contents: 
-                    <div key={"id:"+(paneKey++)} className="tab-container">
-                        {getContents(item)}
-                    </div>
-            })));
-            // console.log(navItems[0].key);
-            navItems.map((item) => {     console.log(item); })
-        }
-        getPanes();
-    }, [])
+    // useEffect(() => {
+    //     let contentsId = 0;
+    //     setPane(datas.map((doc) => ({
+    //         id: datas.indexOf(doc),
+    //         contents:  
+    //             <div key={"id:"+(contentsId++)} className="tab-container">
+    //                 {getDatas(doc)}
+    //             </div>
+    //     })))
+    //     console.log(pane);
+    // }, [])
 
-    const getContents = (item) => {
+    const showNav = () => {
+        let navId = 0;
+        return navItems.map((doc) => (
+            <li
+                id={navId}
+                className={id === navItems.indexOf(doc)
+                    ? "nav-tab-item is-active"
+                    : "nav-tab-item"}
+                onClick={(e) => {
+                    setId((e.currentTarget.id)*1);
+                    // console.log(id);
+                    // console.log(navItems.indexOf(doc));
+                }}
+                key={"id" + (navId++)}>
+                <div className="nav-tab-custom">
+                    {doc}
+                </div>
+            </li>
+        ))
+    }
+
+    // const showPane = () => {
+    //     return pane.filter((doc) => id === doc.id).map((doc) => (doc.contents))
+    // }
+
+    // useEffect(() => {
+    //     const getPanes = async () => {
+    //         let paneKey = 0;
+    //         setPane(navItems.map((item) => ({
+    //             id: item.key, 
+    //             title: item.key,
+    //             contents: 
+    //                 <div key={"id:"+(paneKey++)} className="tab-container">
+    //                     {getContents(item)}
+    //                 </div>
+    //         })));
+    //         navItems.map((item) => {     console.log(item); })
+    //     }
+    //     getPanes();
+    // }, [])
+
+    const showPane = () => {
+        // console.log(pane.filter((doc) => id===pane.indexOf(doc)));
+        return pane.filter((doc) => (id === doc.id)).map((doc) => (doc.contents))
+    }
+
+    const getDatas = (item) => {
     
-        let contentsKey = 0;
-        console.log(item);
-        setContents(
-            Object.keys(item).map((k) => ({year: k, content: k}))
-        );
+        let dataId = 0;
+        const keys = Object.keys(item);
+        contents = keys.map((k) => ({year: k, content: Object.values(item)[keys.indexOf(k)]}));
+        // console.log(contents);
 
         return contents.map((c) => {
-            <div
+            return (<div
                 key={"id" + (
-                    contentsKey++
+                    dataId++
                 )}
                 className="year-content-box">
                 <div className="year">
@@ -60,9 +109,18 @@ const History = ({data}) => {
                 <div className="year-content">
                     {c.content}
                 </div>
-            </div>
+            </div>)
         })
     }
+
+    let contentsId = 0;
+    pane = datas.map((doc) => ({
+        id: datas.indexOf(doc),
+        contents: 
+            <div key={"id:"+(contentsId++)} className="tab-container">
+                {getDatas(doc)}
+            </div>
+    }));
 
     // const panes = [
     //     {
@@ -154,25 +212,6 @@ const History = ({data}) => {
     //             </div>
     //     }
     // ]
-
-    const showNav = () => {
-        return pane.map((doc) => (
-            <li
-                key={"id" + doc.id}
-                className={id === doc.id
-                    ? "nav-tab-item is-active"
-                    : "nav-tab-item"}
-                onClick={() => setId(doc.id)}>
-                <div className="nav-tab-custom">
-                    {doc.title}
-                </div>
-            </li>
-        ))
-    }
-
-    const showPane = () => {
-        return pane.filter((doc) => id === doc.id).map((doc) => (doc.contents))
-    }
 
     return (
         <section className="history-section" id="history">

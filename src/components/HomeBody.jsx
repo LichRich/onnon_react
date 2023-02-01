@@ -6,6 +6,7 @@ import {
     getCountFromServer
 } from 'firebase/firestore';
 import React, {useEffect, useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 
 const HomeBody = ({settings, db}) => {
@@ -14,6 +15,15 @@ const HomeBody = ({settings, db}) => {
     const [pages, setPages] = useState([]);
     const [cardNum, setCardNum] = useState(8);
     const [len, setLen] = useState(0);
+    
+    const navigate = useNavigate();
+    const catClickHandler = (item) => {
+        navigate("/list", {
+            state: {
+                keyword: item,
+            }
+        })
+    }
 
     let currPage = 0;
 
@@ -67,15 +77,15 @@ const HomeBody = ({settings, db}) => {
     let catIndex = 0;
     const slicer = (list, start, end) => {
         return list.slice(start, end).map((v) => (
-            <div key={'id'+(catIndex++)} className="category-card col-3 col-md-6">
-                <a role='link' aria-disabled='true'>
+            <div key={'id'+(catIndex++)} className="category-card col-3 col-md-6" onClick={() => catClickHandler(v.keywords)}>
+                <div className='category-contents'>
                     <div className='category-image card-image'>
                         <img src={v.img} alt='category-img' className="category-img" />
                     </div>
                     <div className='category-caption card-caption'>
                         <p className='category-title'>{v.name}</p>
                     </div>
-                </a>
+                </div>
             </div>
         ));
     }
