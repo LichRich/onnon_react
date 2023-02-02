@@ -3,9 +3,9 @@ import ListBody from "../components/ListBody";
 
 import "../css/list_style.css";
 
-const List = ({settings, db}) => {
+const List = ({settings, db, keyword}) => {
     return(
-        <ListBody settings={settings} db={db} />
+        <ListBody settings={settings} db={db} keyword={keyword} />
     )
 }
 

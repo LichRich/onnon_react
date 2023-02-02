@@ -4,11 +4,17 @@ import {MasonryGrid} from "@egjs/react-grid";
 import Slider from "react-slick";
 import {getDocs, getCountFromServer} from 'firebase/firestore';
 
-const Products = ({settings, data}) => {
+const Products = ({settings, data, path}) => {
 
     const navigate = useNavigate();
-    const toDetail = () => {
-        navigate("/detail");
+    const toDetail = (id) => {
+        // console.log(typeof(data));
+        navigate("/detail", {
+            state: {
+                itemId: id,
+                itemRef: path,
+            }
+        });
     }
 
     const [itemList, setItemList] = useState([]);
@@ -34,11 +40,12 @@ const Products = ({settings, data}) => {
         const getItems = async () => {
             const documentSnapshots = await getDocs(itemRef);
             await setItemList(documentSnapshots.docs.map((doc) => ({
+                id: doc.id,
                 img: doc
                     .data()
                     .img1
             })));
-            console.log(itemList);
+            // console.log(itemList);
         }
         getItems();
     }, [])
@@ -80,7 +87,7 @@ const Products = ({settings, data}) => {
         return list
             .slice(start, end)
             .map((v) => (
-                <div key={'id'+(itemIndex++)} className={"item product-items"} onClick={toDetail}>
+                <div key={'id'+(itemIndex++)} className={"item product-items"} onClick={() => toDetail(v.id)}>
                     <img
                         src={v.img}
                         alt="제품 이미지"

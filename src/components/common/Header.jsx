@@ -1,20 +1,11 @@
 import React, { useState } from 'react';
 import { Icon, Input } from 'semantic-ui-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
-const HomeHeader = ({click}) => {
+const HomeHeader = ({click, handler}) => {
 
     const [text, setText] = useState([]);
 
-    let navigate = useNavigate();
-    const searchHandler = () => {
-        navigate("/list", {
-            state: {
-                keyword: text,
-            }
-        });
-        // navigate(0);
-    }
     const searchBoxHandler = (e) => {
         setText([e.currentTarget.value]);
     }
@@ -31,7 +22,7 @@ const HomeHeader = ({click}) => {
                             name: 'search',
                             circular: true,
                             link: true,
-                            onClick: searchHandler,
+                            onClick: () => handler(text),
                         }}
                         placeholder="기업명 혹은 관련 태그를 입력하세요" />
                     <div className="navbar-logo">

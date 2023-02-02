@@ -1,30 +1,32 @@
 import {React, useState, useRef} from "react";
 import {Icon} from "semantic-ui-react";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import ReactImageMagnify from '@vorld/react-image-magnify';
+import { doc, getDoc } from "firebase/firestore";
+import { firestore } from "../firebaseConfig";
+import { useEffect } from "react";
 
 const DetailBody = () => {
 
+    const [imgList, setImgList] = useState(['']);
+
     const navigate = useNavigate();
+    const location = useLocation();
+    const id = location.state.itemId;
+    const ref = location.state.itemRef;
 
-    const images = ['../img/company/dongseo/products/detail/IMG_1089.jpg', '../img/company/dongseo/products/detail/IMG_1096.jpg', '../img/company/dongseo/products/detail/IMG_1099.jpg'];
-
-    const [img, setImg] = useState(images[0]);
-    const hoverHandler = (image, i) => {
-        setImg(image);
-        refs
-            .current[i]
-            .classList
-            .add('active');
-        for (var j = 0; j < images.length; j++) {
-            if (i !== j) {
-                refs
-                    .current[j]
-                    .classList
-                    .remove('active');
-            }
+    const docRef = doc(firestore, ref, id);
+    
+    useEffect(() => {
+        const getImages = async () => {
+            const docSnap = await getDoc(docRef);
+            setImgList(Object.values(docSnap.data()).map((doc) => doc));
         }
-    };
+        getImages();
+    }, [])
+
+    const [img, setImg] = useState(imgList[0]);
+
     const refs = useRef([]);
     refs.current = [];
     const addRefs = (el) => {
@@ -32,6 +34,22 @@ const DetailBody = () => {
             refs
                 .current
                 .push(el);
+        }
+    };
+
+    const hoverHandler = (image, i) => {
+        setImg(image);
+        refs
+            .current[i]
+            .classList
+            .add('active');
+        for (var j = 0; j < imgList.length; j++) {
+            if (i !== j) {
+                refs
+                    .current[j]
+                    .classList
+                    .remove('active');
+            }
         }
     };
 
@@ -51,7 +69,7 @@ const DetailBody = () => {
                         <div className="left">
                             <div className="left_1">
                                 {
-                                    images.map((image, i) => (
+                                    imgList.map((image, i) => (
                                         <div
                                             className={i == 0
                                                 ? 'img_wrap active'
@@ -90,7 +108,7 @@ const DetailBody = () => {
 
                 <div className="images-list">
                     {
-                        images.map((src, index) => (
+                        imgList.map((src, index) => (
                             <div key={index} className="img-list-box">
                                 <img src={src} alt="" className="img-list-item"/>
                             </div>
