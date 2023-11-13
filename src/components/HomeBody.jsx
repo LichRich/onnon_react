@@ -8,13 +8,13 @@ import {
 import React, {useEffect, useState} from 'react'
 import Slider from 'react-slick';
 
-const HomeBody = ({settings, db}) => {
+const HomeBody = ({settings, db, handler}) => {
 
     const [list, setList] = useState([]);
     const [pages, setPages] = useState([]);
     const [cardNum, setCardNum] = useState(8);
     const [len, setLen] = useState(0);
-
+    
     let currPage = 0;
 
     const categoryRef = collection(db, "categories");
@@ -23,7 +23,6 @@ const HomeBody = ({settings, db}) => {
         const getCLength = async () => {
             const lengthSnapshot = await getCountFromServer(categoryRef);
             await setLen(lengthSnapshot.data().count);
-            console.log("len = " + len);
             setPagesCnt();
         }
         getCLength();
@@ -67,15 +66,15 @@ const HomeBody = ({settings, db}) => {
     let catIndex = 0;
     const slicer = (list, start, end) => {
         return list.slice(start, end).map((v) => (
-            <div key={'id'+(catIndex++)} className="category-card col-3 col-md-6">
-                <a role='link' aria-disabled='true'>
+            <div key={'id'+(catIndex++)} className="category-card col-3 col-md-6" onClick={() => handler(v.keywords)}>
+                <div className='category-contents'>
                     <div className='category-image card-image'>
                         <img src={v.img} alt='category-img' className="category-img" />
                     </div>
                     <div className='category-caption card-caption'>
                         <p className='category-title'>{v.name}</p>
                     </div>
-                </a>
+                </div>
             </div>
         ));
     }

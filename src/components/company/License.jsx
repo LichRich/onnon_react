@@ -17,7 +17,6 @@ const License = ({settings, data}) => {
         const getLicenseLength = async () => {
             const lengthSnapshot = await getCountFromServer(licenseRef);
             await setLicLen(lengthSnapshot.data().count);
-            console.log(licLen);
             setLicensePages();
         }
         getLicenseLength();
@@ -29,7 +28,6 @@ const License = ({settings, data}) => {
             await setLicList(documentSnapshots.docs.map((doc) => ({
                 img: doc.data().img,
             })));
-            console.log(licList);
         }
         getLicenses();
     }, [])
@@ -93,50 +91,6 @@ const License = ({settings, data}) => {
                 <p className="license-title">특허</p>
                 <Slider {...settings} className="carousel license-carousel">
                     {showLicensePage()}
-                    {/* <div className="carousel-item">
-                        <div className="row license-row">
-                            <div className="card-item license-card">
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/onandon1.png"}
-                                    alt="licenses"
-                                    className="license-imgs"/>
-                            </div>
-                            <div className="card-item license-card">
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/onandon1.png"}
-                                    alt="licenses"
-                                    className="license-imgs"/>
-                            </div>
-                            <div className="card-item license-card">
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/onandon1.png"}
-                                    alt="licenses"
-                                    className="license-imgs"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="carousel-item">
-                        <div className="row license-row">
-                            <div className="card-item license-card">
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/onandon1.png"}
-                                    alt="licenses"
-                                    className="license-imgs"/>
-                            </div>
-                            <div className="card-item license-card">
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/onandon1.png"}
-                                    alt="licenses"
-                                    className="license-imgs"/>
-                            </div>
-                            <div className="card-item license-card">
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/onandon1.png"}
-                                    alt="licenses"
-                                    className="license-imgs"/>
-                            </div>
-                        </div>
-                    </div> */}
                 </Slider>
             </div>
         </section>

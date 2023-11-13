@@ -1,5 +1,5 @@
-import {React, useState, useEffect} from 'react';
-import {Routes, Route} from 'react-router-dom';
+import {React, useState} from 'react';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import { firestore } from './firebaseConfig';
 
 import Home from './pages/Home';
@@ -21,9 +21,16 @@ import ToTop from './components/common/ToTop';
 function App() {
 
     const [open, setOpen] = useState(false);
+    const [keywords, setKeywords] = useState([""]);
     const handleClick = () => {
         setOpen(!open);
     };
+
+    let navigate = useNavigate();
+    const searchHandle = (items) => {
+      setKeywords(items);
+      navigate("/list");
+    }
 
     const carousel_settings = {
         dots: true,
@@ -34,20 +41,16 @@ function App() {
         slidesToScroll: 1
     };
 
-    // useEffect(() => {
-    //   console.log(firestore);
-    // });
-
     return (
       <>
         < Loading />
-        <Header click={handleClick}/>
+        <Header click={handleClick} handler={searchHandle}/>
         <Sidebar open={open} click={handleClick}/>
         <Backdrop open={open} click={handleClick}/>
 
         <Routes>
-            <Route exact="exact" path='/' element={<Home settings={carousel_settings} db={firestore} />}/>
-            <Route path='/list' element={<List settings={carousel_settings} db={firestore}/>}/>
+            <Route exact="exact" path='/' element={<Home settings={carousel_settings} db={firestore} handler={searchHandle} />}/>
+            <Route path='/list' element={<List settings={carousel_settings} db={firestore} keyword={keywords}/>}/>
             <Route path='/company' element={<Company settings={carousel_settings} db={firestore} />}/>
             <Route path='/detail' element={<Detail db={firestore} />} />
         </Routes>
@@ -55,7 +58,6 @@ function App() {
         <ToTop />
 
         <Footer/>
-        {/* <div>{firestore._databaseId.projectId}</div> */}
       </>
     );
 }

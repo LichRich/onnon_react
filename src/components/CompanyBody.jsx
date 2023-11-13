@@ -17,6 +17,7 @@ const CompanyBody = ({settings}) => {
     const [dataC, setDataC] = useState([]);
 
     const companyRef = doc(firestore, "companies", id);
+    const productsPATH = "companies/"+id+"/products";
     const collections = {
         license: collection(firestore, "companies/"+id+"/license"),
         products: collection(firestore, "companies/"+id+"/products"),
@@ -44,7 +45,7 @@ const CompanyBody = ({settings}) => {
     return (
         <div className="sections company-section">
             <About data={dataA} />
-            <Products settings={settings} data={collections.products} />
+            <Products settings={settings} data={collections.products} path={productsPATH} />
             <hr className="divider-w" />
             <History data={collections.history} />
             <hr className="divider-w" />

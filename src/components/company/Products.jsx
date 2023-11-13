@@ -4,11 +4,16 @@ import {MasonryGrid} from "@egjs/react-grid";
 import Slider from "react-slick";
 import {getDocs, getCountFromServer} from 'firebase/firestore';
 
-const Products = ({settings, data}) => {
+const Products = ({settings, data, path}) => {
 
     const navigate = useNavigate();
-    const toDetail = () => {
-        navigate("/detail");
+    const toDetail = (id) => {
+        navigate("/detail", {
+            state: {
+                itemId: id,
+                itemRef: path,
+            }
+        });
     }
 
     const [itemList, setItemList] = useState([]);
@@ -24,7 +29,6 @@ const Products = ({settings, data}) => {
         const getItemLength = async () => {
             const lengthSnapshot = await getCountFromServer(itemRef);
             await setItemLen(lengthSnapshot.data().count);
-            console.log(itemLen);
             setItemPages();
         }
         getItemLength();
@@ -34,11 +38,11 @@ const Products = ({settings, data}) => {
         const getItems = async () => {
             const documentSnapshots = await getDocs(itemRef);
             await setItemList(documentSnapshots.docs.map((doc) => ({
+                id: doc.id,
                 img: doc
                     .data()
                     .img1
             })));
-            console.log(itemList);
         }
         getItems();
     }, [])
@@ -80,7 +84,7 @@ const Products = ({settings, data}) => {
         return list
             .slice(start, end)
             .map((v) => (
-                <div key={'id'+(itemIndex++)} className={"item product-items"} onClick={toDetail}>
+                <div key={'id'+(itemIndex++)} className={"item product-items"} onClick={() => toDetail(v.id)}>
                     <img
                         src={v.img}
                         alt="제품 이미지"
@@ -109,97 +113,6 @@ const Products = ({settings, data}) => {
                 </div>
                 <Slider {...settings}>
                     {showItemPage()}
-                    {/* <div className="carousel-item">
-                        <MasonryGrid
-                            className="container masonry-container"
-                            gap={30}
-                            defaultDirection={"end"}
-                            align={"center"}
-                            column={3}>
-                            <div className={"item product-items"} onClick={toDetail}>
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/products/IMG_1099.jpg"}
-                                    alt="제품 이미지"
-                                    className="product-imgs"/>
-                            </div>
-                            <div className={"item product-items"}>
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/products/IMG_1118.jpg"}
-                                    alt="제품 이미지"
-                                    className="product-imgs"/>
-                            </div>
-                            <div className={"item product-items"}>
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/products/IMG_1134.jpg"}
-                                    alt="제품 이미지"
-                                    className="product-imgs"/>
-                            </div>
-                            <div className={"item product-items"}>
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/products/IMG_1149.jpg"}
-                                    alt="제품 이미지"
-                                    className="product-imgs"/>
-                            </div>
-                            <div className={"item product-items"}>
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/products/IMG_1195.jpg"}
-                                    alt="제품 이미지"
-                                    className="product-imgs"/>
-                            </div>
-                            <div className={"item product-items"}>
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/products/IMG_1202.jpg"}
-                                    alt="제품 이미지"
-                                    className="product-imgs"/>
-                            </div>
-                        </MasonryGrid>
-                    </div> */}
-                    <div className="carousel-item">
-                        <MasonryGrid
-                            className="container masonry-container"
-                            gap={30}
-                            defaultDirection={"end"}
-                            align={"center"}
-                            column={3}>
-                            <div className={"item product-items"}>
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/products/IMG_1223.jpg"}
-                                    alt="제품 이미지"
-                                    className="product-imgs"/>
-                            </div>
-                            <div className={"item product-items"}>
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/products/IMG_1227.jpg"}
-                                    alt="제품 이미지"
-                                    className="product-imgs"/>
-                            </div>
-                            <div className={"item product-items"}>
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/products/IMG_1250.jpg"}
-                                    alt="제품 이미지"
-                                    className="product-imgs"/>
-                            </div>
-                            <div className={"item product-items"}>
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/products/IMG_1253.jpg"}
-                                    alt="제품 이미지"
-                                    className="product-imgs"/>
-                            </div>
-                            <div className={"item product-items"}>
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/products/IMG_1264.jpg"}
-                                    alt="제품 이미지"
-                                    className="product-imgs"/>
-                            </div>
-                            <div className={"item product-items"}>
-                                <img
-                                    src={process.env.PUBLIC_URL + "/img/company/dongseo/products/IMG_1268.jpg"}
-                                    alt="제품 이미지"
-                                    className="product-imgs"/>
-                            </div>
-                        </MasonryGrid>
-                    </div>
-
                 </Slider>
             </div>
         </section>
