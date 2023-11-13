@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from 'react';
+import {React, useState} from 'react';
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import { firestore } from './firebaseConfig';
 
@@ -41,10 +41,6 @@ function App() {
         slidesToScroll: 1
     };
 
-    // useEffect(() => {
-    //   console.log(firestore);
-    // });
-
     return (
       <>
         < Loading />
@@ -62,7 +58,6 @@ function App() {
         <ToTop />
 
         <Footer/>
-        {/* <div>{firestore._databaseId.projectId}</div> */}
       </>
     );
 }

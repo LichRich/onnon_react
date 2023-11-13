@@ -26,6 +26,10 @@ const DetailBody = () => {
     }, [])
 
     const [img, setImg] = useState(imgList[0]);
+    
+    useEffect(() => {
+        setImg(imgList[0]);
+    }, [imgList])
 
     const refs = useRef([]);
     refs.current = [];
@@ -53,6 +57,20 @@ const DetailBody = () => {
         }
     };
 
+    const getLists = () => {
+        return (imgList.map((image, i) => (
+            <div
+                className={i == 0
+                    ? 'img_wrap active'
+                    : 'img_wrap'}
+                key={i}
+                onMouseOver={() => hoverHandler(image, i)}
+                ref={addRefs}>
+                <img src={image} alt=""/>
+            </div>
+        )))
+    }
+
     return (
         <div className="section-showcase">
             <div className="container showcase-container">
@@ -68,19 +86,7 @@ const DetailBody = () => {
                     <div className="detail-img-container">
                         <div className="left">
                             <div className="left_1">
-                                {
-                                    imgList.map((image, i) => (
-                                        <div
-                                            className={i == 0
-                                                ? 'img_wrap active'
-                                                : 'img_wrap'}
-                                            key={i}
-                                            onMouseOver={() => hoverHandler(image, i)}
-                                            ref={addRefs}>
-                                            <img src={image} alt=""/>
-                                        </div>
-                                    ))
-                                }
+                                {getLists()}
                             </div>
                             <div className="left_2">
                                 <ReactImageMagnify

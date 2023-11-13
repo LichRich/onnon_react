@@ -23,7 +23,6 @@ const HomeBody = ({settings, db, handler}) => {
         const getCLength = async () => {
             const lengthSnapshot = await getCountFromServer(categoryRef);
             await setLen(lengthSnapshot.data().count);
-            console.log("len = " + len);
             setPagesCnt();
         }
         getCLength();

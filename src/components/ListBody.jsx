@@ -11,7 +11,6 @@ const ListBody = ({settings, db, keyword}) => {
 
     useEffect(() => {
         query_ = query(companiesRef, where("keywords", "array-contains-any", keyword));
-        console.log(keyword);
     }, [keyword])
 
     const [companyList, setCompanyList] = useState([]);
