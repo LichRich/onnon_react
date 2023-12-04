@@ -4,15 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'semantic-ui-css/semantic.min.css'
-import { BrowserRouter, HashRouter } from 'react-router-dom';
+import { BrowserRouter} from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <HashRouter>
         <App />
-      </HashRouter>
     </BrowserRouter>
   </React.StrictMode>
 );
