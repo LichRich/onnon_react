@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/onnon_react/static/css/main.75aa8f8c.css",
-    "main.js": "/onnon_react/static/js/main.3e202a02.js",
+    "main.js": "/onnon_react/static/js/main.f364655d.js",
     "static/js/787.5e5735fe.chunk.js": "/onnon_react/static/js/787.5e5735fe.chunk.js",
     "static/media/GmarketSansBold.otf": "/onnon_react/static/media/GmarketSansBold.03ceab7804dad3e86672.otf",
     "static/media/GmarketSansMedium.otf": "/onnon_react/static/media/GmarketSansMedium.3b975ddd58dcbe363ee5.otf",
@@ -28,11 +28,11 @@
     "static/media/slick.woff": "/onnon_react/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/onnon_react/index.html",
     "main.75aa8f8c.css.map": "/onnon_react/static/css/main.75aa8f8c.css.map",
-    "main.3e202a02.js.map": "/onnon_react/static/js/main.3e202a02.js.map",
+    "main.f364655d.js.map": "/onnon_react/static/js/main.f364655d.js.map",
     "787.5e5735fe.chunk.js.map": "/onnon_react/static/js/787.5e5735fe.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.75aa8f8c.css",
-    "static/js/main.3e202a02.js"
+    "static/js/main.f364655d.js"
   ]
 }
