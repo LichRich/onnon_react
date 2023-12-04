@@ -1,5 +1,5 @@
 import {React, useState} from 'react';
-import {Routes, Route, useNavigate, HashRouter} from 'react-router-dom';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import { firestore } from './firebaseConfig';
 
 import Home from './pages/Home';
@@ -48,14 +48,12 @@ function App() {
         <Sidebar open={open} click={handleClick}/>
         <Backdrop open={open} click={handleClick}/>
 
-        <HashRouter>
-          <Routes>
-              <Route exact="exact" path='/' element={<Home settings={carousel_settings} db={firestore} handler={searchHandle} />}/>
-              <Route path='/list' element={<List settings={carousel_settings} db={firestore} keyword={keywords}/>}/>
-              <Route path='/company' element={<Company settings={carousel_settings} db={firestore} />}/>
-              <Route path='/detail' element={<Detail db={firestore} />} />
-          </Routes>
-        </HashRouter>
+        <Routes>
+            <Route exact="exact" path='/' element={<Home settings={carousel_settings} db={firestore} handler={searchHandle} />}/>
+            <Route path='/list' element={<List settings={carousel_settings} db={firestore} keyword={keywords}/>}/>
+            <Route path='/company' element={<Company settings={carousel_settings} db={firestore} />}/>
+            <Route path='/detail' element={<Detail db={firestore} />} />
+        </Routes>
 
         <ToTop />
 
