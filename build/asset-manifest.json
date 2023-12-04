@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/onnon_react/static/css/main.07eb4d69.css",
+    "main.css": "/onnon_react/static/css/main.75aa8f8c.css",
     "main.js": "/onnon_react/static/js/main.3e202a02.js",
     "static/js/787.5e5735fe.chunk.js": "/onnon_react/static/js/787.5e5735fe.chunk.js",
     "static/media/GmarketSansBold.otf": "/onnon_react/static/media/GmarketSansBold.03ceab7804dad3e86672.otf",
@@ -27,12 +27,12 @@
     "static/media/slick.ttf": "/onnon_react/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/onnon_react/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/onnon_react/index.html",
-    "main.07eb4d69.css.map": "/onnon_react/static/css/main.07eb4d69.css.map",
+    "main.75aa8f8c.css.map": "/onnon_react/static/css/main.75aa8f8c.css.map",
     "main.3e202a02.js.map": "/onnon_react/static/js/main.3e202a02.js.map",
     "787.5e5735fe.chunk.js.map": "/onnon_react/static/js/787.5e5735fe.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.07eb4d69.css",
+    "static/css/main.75aa8f8c.css",
     "static/js/main.3e202a02.js"
   ]
 }
