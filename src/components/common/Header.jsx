@@ -14,17 +14,6 @@ const HomeHeader = ({click, handler}) => {
         <nav className="navbar bg-dark" id='top-navbar'>
             <div className="container navbar-container">
                 <div className="row header-row">
-                    <Input
-                        id="home-search"
-                        onChange={searchBoxHandler}
-                        icon={{
-                            id: "search-button",
-                            name: 'search',
-                            circular: true,
-                            link: true,
-                            onClick: () => handler(text),
-                        }}
-                        placeholder="기업명 혹은 관련 태그를 입력하세요" />
                     <div className="navbar-logo">
                         <Link to="/">
                             <img
@@ -38,6 +27,17 @@ const HomeHeader = ({click, handler}) => {
                     </div>
                 </div>
             </div>
+            <Input
+                id="home-search"
+                onChange={searchBoxHandler}
+                icon={{
+                    id: "search-button",
+                    name: 'search',
+                    circular: true,
+                    link: true,
+                    onClick: () => handler(text),
+                }}
+                placeholder="기업명 혹은 관련 태그를 입력하세요" />
         </nav>
     )
 

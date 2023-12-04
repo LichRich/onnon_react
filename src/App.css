@@ -4,7 +4,7 @@
  *                                                             *
  ***************************************************************/
 :root {
-    --navbar-height: 70px;
+    --navbar-height: 60px;
 }
 
 * {
@@ -111,18 +111,22 @@ a:hover {
 }
 
 .header-row {
-    height: 100%;
+    height: 50%;
     align-items: center;
+    justify-content: space-between;
 }
 
 .input {
-    width: 33%;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 30px;
+    border: #111;
 }
 
 .navbar-logo {
     width: 33%;
     text-align: center;
-    justify-content: center;
+    justify-content: flex-start;
     display: flex;
     height: 100%;
     align-items: center;
@@ -132,10 +136,21 @@ a:hover {
     display: flex;
     align-items: center;
     padding: 10px 0;
+    margin-left: 50px;
 }
 
 #logo {
     height: 3.5rem;
+}
+
+#home-search {
+    border: 3px solid #000;
+    border-radius: 10px;
+}
+
+#search-button {
+    border: 2px solid #000;
+    top: 0.5em;
 }
 
 /***************************************************************
