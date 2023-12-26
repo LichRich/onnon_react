@@ -127,7 +127,7 @@ const ListBody = ({settings, db, keyword}) => {
     return (
         <section className="sections section-list">
             <div className="container container-list">
-                <h2 id="list-title">기업 목록</h2>
+                <h2 id="list-title">'{keyword[1]}' 기업 목록</h2>
                 <Slider {...settings}>
                     {showCompanyPages()}
                 </Slider>

@@ -18,7 +18,10 @@ body {
     text-align: center;
     font-family: gmarket-sans;
     font-size: 2rem;
-    margin: 2.5rem 0;
+    padding-top: 120px;
+    padding-bottom: 35px;
+    margin: 0;
+    /* margin: 2.5rem 0; */
 }
 
 .list-row {
