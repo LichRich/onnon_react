@@ -22,8 +22,12 @@ const HomeHeader = ({click, handler}) => {
                             id='logo'/>
                         </Link>
                     </div>
-                    <div className="sidebar-toggle" onClick={click}>
-                        <Icon id='sidebar-toggler' name="bars"></Icon>
+                    <div className="navbar-menuItem-list">
+                        <p className='navbar-menuItem'>About</p>
+                        <p className='navbar-menuItem'>News</p>
+                        <div className="sidebar-toggle" onClick={click}>
+                            <Icon id='sidebar-toggler' name="bars"></Icon>
+                        </div>
                     </div>
                 </div>
             </div>
